@@ -3,25 +3,23 @@
 setwd("Your working directory")
 source("helper_6.R")
 
-# Main Function Begins
-
 generate_sample <- function(ind, vars=c(3, 10, 17), hidden=3){
   set.seed(ind)
   #n <- ifelse(small, 5000, 10000)
   n <- 10000
   p <- 20
-  # Assume that there are 3 hidden variables z1 z2 z3.
+  # Assume that there are 4 hidden variables z1 z2 z3.
   z <- matrix(runif(n * hidden, 10, 20), nrow = n)
   b <- matrix(runif(p * hidden, 0, 1), nrow = hidden)
   eps_all <- matrix(rnorm(n * p), nrow = n)
-  flag <- z %*% b
+  flag <- sqrt(z %*% b)
   flag1 <- flag[, 1:10]
   flag2 <- matrix(rnorm(n * (p - 10)), nrow = n)
   x <- cbind(flag1, flag2)
   x <- x + eps_all
   colnames(x) = paste0(rep("x", p), seq(1, p))
   eps <- rnorm(n)
-  y <- x[, vars[1]]^2 + 3*x[, vars[2]] + sqrt(x[, vars[3]]) + 
+  y <- x[, vars[1]] + x[, vars[2]] + x[, vars[3]] + 
     z %*% runif(hidden) + eps
   mysample <- function(ind, mydata){
     set.seed(ind)
@@ -55,8 +53,8 @@ mixfun <- function(sample, num_hidden=0){
 }
 
 experiment <- function(pc, B=20){
-  samples <- mclapply(1:B, function(i) generate_sample(2021+i), mc.cores = 8)
-  res_fin <- mclapply(0:pc, function(j) lapply(1:B, function(i) mixfun(sample = samples[[i]], num_hidden = j)), mc.cores = 8)
+  samples <- lapply(1:B, function(i) generate_sample(2021+i))
+  res_fin <- lapply(0:pc, function(j) lapply(1:B, function(i) mixfun(sample = samples[[i]], num_hidden = j)))
   freq_vec <- list()
   for (k in 1:(pc+1)){
     temp <- numeric(20)
@@ -69,5 +67,4 @@ experiment <- function(pc, B=20){
 }
 
 require(FOCI)
-require(parallel)
 experiment(pc=20)
