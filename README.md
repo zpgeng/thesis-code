@@ -18,8 +18,8 @@ In brief, our workflow for the thesis is organised into 7 experiments
 
 ## Replicating instructions for Folder `exp7`
 
-  1. Run  `exp7_PCA.R` and save the outputs into folder `results`.
-  2. Generating datasets using `Export_dataset.R` and run the IPython notebook `VAE_Latent_Confounder_Finder.ipynb`.
+    1. Run  `exp7_PCA.R` and save the outputs into folder `results`.
+    2. Generating datasets using `Export_dataset.R` and run the IPython notebook `VAE_Latent_Confounder_Finder.ipynb`.
     3. Save the generated latent confounder estimation files into your self-defined directory.
     4. Run `exp7_VAE.R` using the self-defined directory in step 3 and save the outputs into folder `results`.
     5. Run `kernel_density_plot.R` to generate plots.
