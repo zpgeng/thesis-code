@@ -15,6 +15,7 @@ In brief, our workflow for the thesis is organised into 7 experiments
 - a `exp6` folder containing all codes and output plots for Experiment 6,
 - a `exp7` folder containing all codes and plots for Experiment 7,
     - a `results` folder containing all `.RData` outputs for Experiment 7.
+- a `real_data` folder containing all codes and required UCI Wine Quality datasets. 
 
 ## Replicating instructions for Folder `exp7`
 
@@ -59,6 +60,10 @@ In R GUI (or RStudio), please install the following packages beforehand:
 - `pracma`
 - `dplyr`
 - `hrbrthemes`
+- `tidyverse`
+- `glmnet`
+- `ncvreg`
+- `randomForest`
 
 It is recommended to run the `.ipynb` file using [Google Colab](https://colab.research.google.com/).
 
